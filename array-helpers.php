@@ -141,6 +141,24 @@ function array_levels(array $array, $level = 0)
 // _____________________________________________________________________________
 
 /**
+ * Adds string as prefix and postfix to each array element.
+ *
+ * @param   array   $array     Array to untrim
+ * @param   string  $chars     Characters to add
+ *
+ * @return	array	Untrimmed array
+ */
+function array_untrim(array $array, $chars = null)
+{
+    foreach ($array as &$value) {
+        $value = $chars . $value . $chars;
+    }
+    return $array;
+}
+
+// _____________________________________________________________________________
+
+/**
  * @ignore
  */
 function __array_trim_callback(&$v, $k, $params)
