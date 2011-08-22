@@ -263,12 +263,15 @@ function array_key_from_value(array $source, $key, $remove = false, $oldTo = nul
  */
 function array_remove_empty(array $source)
 {
-	if (null === $source) {
-		return array();
+	if (null === $source or empty($source)) {
+		return $source;
 	}
 	$data = array();
 	foreach ($source as $key => $val) {
-		if (null !== $val and '' !== $val) {
+		if (null !== $val and !empty($val)) {
+			if (is_array($val)) {
+				$val = array_remove_empty($val);
+			}
 			$data[$key] = $val;
 		}
 	}
