@@ -255,7 +255,7 @@ function array_key_from_value(array $source, $key, $remove = false, $oldTo = nul
 // _____________________________________________________________________________
 
 /**
- * Remove keys with empty values
+ * Remove keys with empty values (recursive)
  *
  * @param   array           Source array
  *
@@ -272,7 +272,9 @@ function array_remove_empty(array $source)
 			if (is_array($val)) {
 				$val = array_remove_empty($val);
 			}
-			$data[$key] = $val;
+			if (null !== $val and !empty($val)) {
+				$data[$key] = $val;
+			}
 		}
 	}
 	return $data;
